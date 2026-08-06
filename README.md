@@ -1,0 +1,2 @@
+# Baladna
+Baladna is a civic issue reporting platform. Citizens submit public issue reports (damaged roads, water leaks, waste accumulation, broken streetlights), and government employees review and update their statuses.
