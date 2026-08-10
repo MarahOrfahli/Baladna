@@ -1,8 +1,11 @@
+// import { useTranslation } from "react-i18next";
+import PublicLayout from "./layouts/PublicLayout";
+
 const App = () => {
   return ( 
-    <>
-    Hello World!
-    </>
+    <div className="rtl:font-arabic ltr:font-english">
+    <PublicLayout/>
+    </div>
    );
 }
  

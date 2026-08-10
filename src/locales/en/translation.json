@@ -1,0 +1,21 @@
+{
+  "landing_page": {
+    "header_nav":{
+      "main": "Homepage",
+      "how_word": "How does it work?",
+      "features": "Features",
+      "communities": "Communities",
+      "faq": "FAQs"
+    },
+    "header_btns":{
+      "login":"Sign In",
+      "report": "Report A Problem"
+    },
+    "hero_section":{
+      "official_title" : "The Direct Digital Bridge between Citizens and Government Entities",
+      "title": "Your voice has reached us",
+      "description_p1": "Our platform is a unified, interactive gateway that connects you directly with the government and is built on complete transparency",
+      "description_p2": "Report municipal service complaints (covering excavations, street lighting, water issues, and waste) participate in verifying your neighbors' reports to elevate their priority, and track the status of all updates step by step"
+    }
+  }
+}

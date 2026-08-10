@@ -16,5 +16,10 @@ export const API_ENDPOINTS_PUPLIC = {
     AGENCY: (id, agency_id) => `/categories/${id}?agency_id=${agency_id}`,
     ACTIVITY_AGENCY: (id, agency_id, is_active) => `/categories/${id}?agency_id=${agency_id}?&active=${is_active}`
   },
+  Website:{
+    STATUS: "/website/stats",
+    REPORT: "/website/latest-anonymous-reports",
+    REPORT_POST: "/reports/anonymous"
+  }
   
 };
