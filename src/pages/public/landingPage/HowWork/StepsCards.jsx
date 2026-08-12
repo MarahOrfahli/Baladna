@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import Image from "../../../../components/ui/Image";
 const StepsCard = ({ step }) => {
   const { t } = useTranslation();
 
@@ -14,11 +15,7 @@ const StepsCard = ({ step }) => {
           </span>
         </div>
         <div className="flex justify-center items-center gap-3 flex-col p-6">
-          <img
-            src={step.img}
-            alt="Description of the image"
-            className={`${step.imgClass} object-cover`}
-          />
+          <Image url={step.img} classes={step.imgClass}/>
           <h4>{t(step.title)}</h4>
         </div>
       </div>

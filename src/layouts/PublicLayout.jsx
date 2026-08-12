@@ -28,7 +28,7 @@ const PublicLayout = () => {
   const handleNavClick = (sectionId) => {
     console.log(sectionId)
     setActiveSection(sectionId);
-    // الوصول للمرجع المطلوب من داخل الكائن عبر معرف القسم
+    
     const targetElement = sectionRefs.current[sectionId];
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: "smooth" });
