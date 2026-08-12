@@ -1,21 +1,48 @@
 {
   "landing_page": {
-    "header_nav":{
+    "header_nav": {
       "main": "Homepage",
-      "how_word": "How does it work?",
+      "how_work": "How does it work?",
       "features": "Features",
       "communities": "Communities",
       "faq": "FAQs"
     },
-    "header_btns":{
-      "login":"Sign In",
+    "header_btns": {
+      "login": "Sign In",
       "report": "Report A Problem"
     },
-    "hero_section":{
-      "official_title" : "The Direct Digital Bridge between Citizens and Government Entities",
+    "hero_section": {
+      "official_title": "The Direct Digital Bridge between Citizens and Government Entities",
       "title": "Your voice has reached us",
       "description_p1": "Our platform is a unified, interactive gateway that connects you directly with the government and is built on complete transparency",
-      "description_p2": "Report municipal service complaints (covering excavations, street lighting, water issues, and waste) participate in verifying your neighbors' reports to elevate their priority, and track the status of all updates step by step"
+      "description_p2": "Report municipal service complaints (covering excavations, street lighting, water issues, and Waste accumulation) participate in verifying your neighbors' reports to elevate their priority, and track the status of all updates step by step",
+      "btn": "Discover Features"
+    },
+    "divider_section": {
+      "resolved_description": "Resolved reports",
+      "pending_description": "Reports in progress",
+      "areas_description": "Areas currently under active work",
+      "agencies_description": "Active onboarded agencies"
+    },
+    "HowItWorks": {
+      "section":{
+        "short_title":"How It Works",
+        "long_title":"Four Steps To Change Your City",
+        "discription":"Baladna platform is designed for ease and speed—with no need for paperwork or in-person visits to the municipality"
+      },
+      "steps": {
+        "step1_title": "Submit Your Complaint",
+        "step2_title": "Intelligent Routing",
+        "step3_title": "Immediate Action",
+        "step4_title": "Continuous Updates"
+      },
+      "Descriptions": {
+        "step1_des": "Specify the location, add a title and description, and attach an optional photo or video. You may file the report using your account for seamless tracking, or as a guest by providing your contact details.",
+        "step2_des": "The platform automatically routes your report to the appropriate department or government entity based on the location and type of issue.",
+        "step3_des": "Upon receipt and approval of your report, the responsible entity initiates immediate action.",
+        "step4_des": "You will receive real-time notifications via the platform the moment the entity receives the issue, throughout the processing phase, until the resolution is fully completed."
+      },
+      "login_btn": "Create Your Account To Recive Upates"
     }
   }
 }
