@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+
+function localStorageValue(localvalue) {
+  return typeof localvalue === "string" ? localvalue : JSON.parse(localvalue);
+}
 
 export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const localValue = localStorage.getItem(key);
-    return localValue ? JSON.parse(localValue) : initialValue;
+
+    return localValue ? localStorageValue(localValue) : initialValue;
   });
 
   useEffect(() => {

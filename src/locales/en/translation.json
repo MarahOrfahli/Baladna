@@ -1,10 +1,12 @@
 {
+  "logo_title":"Together We Build",
   "landing_page": {
     "header_nav": {
       "main": "Homepage",
       "how_work": "How does it work?",
-      "features": "Features",
+      "reports":"Reports",
       "communities": "Communities",
+      "features": "Features",
       "faq": "FAQs"
     },
     "header_btns": {
@@ -16,7 +18,7 @@
       "title": "Your voice has reached us",
       "description_p1": "Our platform is a unified, interactive gateway that connects you directly with the government and is built on complete transparency",
       "description_p2": "Report municipal service complaints (covering excavations, street lighting, water issues, and Waste accumulation) participate in verifying your neighbors' reports to elevate their priority, and track the status of all updates step by step",
-      "btn": "Discover Features"
+      "btn": "Discover Reports Around You"
     },
     "divider_section": {
       "resolved_description": "Resolved reports",

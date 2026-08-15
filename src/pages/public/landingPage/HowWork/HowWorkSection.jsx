@@ -21,34 +21,34 @@ export const HowItWorks = forwardRef((props, ref) => {
       title: "landing_page.HowItWorks.steps.step1_title",
       description: "landing_page.HowItWorks.Descriptions.step1_des",
       img: problemSite,
-      imgClass: 'w-40 h-50'
+      imgClass: 'sm:w-40 sm:h-50 max-sp:w-35 max-sp:h-45 sp:w-30 sp:h-40'
     },
     {
       number: 2,
       title: "landing_page.HowItWorks.steps.step2_title",
       description: "landing_page.HowItWorks.Descriptions.step2_des",
       img: toEmployee,
-      imgClass: 'w-60 h-40 mb-6'
+      imgClass: 'sm:w-60 sm:h-40 lg:mb-6 max-sp:w-50 max-sp:h-40 max-sp:mb-3 sp:w-25 sp:h-20'
     },
     {
       number: 3,
       title: "landing_page.HowItWorks.steps.step3_title",
       description: "landing_page.HowItWorks.Descriptions.step3_des",
       img: working,
-      imgClass: 'w-40 h-50'
+      imgClass: 'md:w-40 md:h-50 sp:w-30 sp:h-40'
     },
     {
       number: 4,
       title: "landing_page.HowItWorks.steps.step4_title",
       description: "landing_page.HowItWorks.Descriptions.step4_des",
       img: UpdatesImg,
-      imgClass: 'w-40 h-50'
+      imgClass: 'sm:w-40 sm:h-50 sp:w-35 sp:h-40'
     }
   ];
 
   return (
     <section ref={ref} className="py-24 bg-white relative">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-sp:px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-emerald-600 font-bold tracking-wider uppercase mb-3">
             {t("landing_page.HowItWorks.section.short_title")}
@@ -61,11 +61,12 @@ export const HowItWorks = forwardRef((props, ref) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 group h-65 gap-10 perspective-[1000px]">
+ {/* max-sp:h-300 max-sp:w-60 max-sp:m-auto h-100 */}
+        <div className="grid grid-cols-2 max-sp:grid-cols-1 lg:grid-cols-4 group max-sp:h-300 sp:w-full sp:h-130 sp:gap-2 sm:gap-5 lg:h-65 gap-10 perspective-[1000px]">  
           <div className="hidden lg:block absolute top-30 left-[10%] right-[10%] h-0.5 bg-linear-to-r from-slate-100 via-green-200 to-slate-100 z-0"></div>
           {steps.map((step) => {
             return (
-              <StepsCard step={step}/>
+              <StepsCard key={step.number} step={step}/>
             );
           })}
         </div>

@@ -10,7 +10,7 @@ const Hero = forwardRef((props, ref) => {
   const { t } = useTranslation();
   return (
     <section ref={ref}
-      className="relative pt-20 pb-15 lg:pt-25 lg:pb-18 overflow-hidden bg-linear-to-b from-emerald-50/50 via-white to-slate-50"
+      className="relative pt-20 pb-15 lg:pb-18 overflow-hidden bg-linear-to-b from-emerald-50/50 via-white to-slate-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

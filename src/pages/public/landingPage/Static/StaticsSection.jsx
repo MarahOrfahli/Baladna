@@ -13,8 +13,8 @@ const StatusSection = () => {
   return (
     <section id="statics_section" className="bg-[#033d34]">
       <div className="relative">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 max-[320px]:grid-cols-1 lg:grid-cols-4 gap-7 items-center justify-center py-12">
+        <div className="container mx-auto max-sp:px-4">
+          <div className="grid grid-cols-2 max-sp:grid-cols-1 lg:grid-cols-4 sm:gap-4 gap-7 items-center justify-center py-12">
             {status.map((state) => (
               <StaticCard
                 key={state.type}

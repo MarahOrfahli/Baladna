@@ -1,4 +1,4 @@
-import api from "./api/axiosClients";
+import {api} from "./api/axiosClients";
 
 export const getData = async (endpointAPI) => {
   const response = await api.get(endpointAPI);

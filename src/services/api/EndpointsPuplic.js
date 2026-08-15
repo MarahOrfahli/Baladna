@@ -20,6 +20,8 @@ export const API_ENDPOINTS_PUPLIC = {
     STATUS: "/website/stats",
     REPORT: "/website/latest-anonymous-reports",
     REPORT_POST: "/reports/anonymous"
-  }
-  
+  },
+  Login: "/auth/login",
+  Logout: "/auth/logout",
+  Register: "/auth/register"
 };

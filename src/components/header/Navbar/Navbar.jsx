@@ -1,3 +1,5 @@
+import Button from "../../ui/Button";
+
 const Nav = ({ activeSection, handleNavClick, links }) => {
   const getButtonStyle = (sectionId) => ({
     cursor: 'pointer',
@@ -11,13 +13,7 @@ const Nav = ({ activeSection, handleNavClick, links }) => {
     <>
       <nav className="hidden md:flex md:text-[0.9rem] lg:text-[1rem] items-center gap-8">
         {links.map((link) => (
-        <button 
-          key={link.id} 
-          onClick={() => handleNavClick(link.id)} 
-          style={getButtonStyle(link.id)}
-        >
-          {link.name}
-        </button>
+          <Button key={link.id} fn={() => handleNavClick(link.id)} style={getButtonStyle(link.id)} content={link.name} />
       ))}
       </nav>
     </>

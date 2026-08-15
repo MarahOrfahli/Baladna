@@ -1,13 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useLocalStorage } from "../useLocalStorage";
 
-const ThemeContext = createContext("light");
+const ThemeContext = createContext(null);
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useLocalStorage("theme", "light");
 
   function toggleTheme() {
     setTheme((currentVal) => (currentVal === "light" ? "dark" : "light"));
   }
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const value = { theme, toggleTheme };
 
