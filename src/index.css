@@ -32,8 +32,8 @@
   --breakpoint-laptop: 64rem;
   --breakpoint-desktop: 80rem;
   /* Images */
-  --background-image-hero-track: url('./assets/images/track.jpg');
-  --background-image-hero-person: url('./assets/images/person.jpg');
+  --background-image-hero-track: url('../public/track.jpg');
+  --background-image-hero-person: url('./public/person.jpg');
   /* Animations */
   --animate-border-rotate: border-rotate 4s linear infinite;
   --animate-page-load: page-load 0.8s ease-out forwards;

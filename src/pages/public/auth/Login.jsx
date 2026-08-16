@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faEye, faEyeSlash  } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faEye,
+  faEyeSlash
+} from "@fortawesome/free-solid-svg-icons";
 import Label from "../../../components/form/Label";
 import Input from "../../../components/form/input/InputField";
 import Checkbox from "../../../components/form/input/Checkbox";
 import Button from "../../../components/ui/Button";
-
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +21,7 @@ export default function SignInForm() {
           to="/"
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
         >
-          <FontAwesomeIcon icon={ faChevronLeft }/>
+          <FontAwesomeIcon icon={faChevronLeft} />
           Back to homepage
         </Link>
       </div>
@@ -107,9 +110,17 @@ export default function SignInForm() {
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
                       {showPassword ? (
-                        <FontAwesomeIcon icon={faEye} size="5" className="fill-gray-500 dark:fill-gray-400"  />
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          size="5"
+                          className="fill-gray-500 dark:fill-gray-400"
+                        />
                       ) : (
-                        <FontAwesomeIcon icon={faEyeSlash } size="5" className="fill-gray-500 dark:fill-gray-400"  />
+                        <FontAwesomeIcon
+                          icon={faEyeSlash}
+                          size="5"
+                          className="fill-gray-500 dark:fill-gray-400"
+                        />
                       )}
                     </span>
                   </div>
@@ -129,7 +140,11 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm" content={'Sign in'} />
+                  <Button
+                    size="sm"
+                    content={"Sign in"}
+                    className={`flex items-center justify-center w-full px-4 py-3 text-sm font-medium dark:bg-mist-500 bg-basic-green hover:bg-brand-600 text-white transition rounded-lg shadow-theme-xs`}
+                  />
                 </div>
               </div>
             </form>

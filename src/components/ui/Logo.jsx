@@ -1,13 +1,16 @@
 import Image from "./Image";
-import LogoBaladna from '../../assets/images/Logo.png'
+import LogoBaladna from '../../../public/Logo.png'
 import { useTranslation } from "react-i18next";
 
-const Logo = ({ without = false, imgSize="h-10"}) => {
+const Logo = ({ isImage = false, without = false, imgSize="h-10"}) => {
   const {t} = useTranslation()
+  function action(){
+    !isImage ?  window.scrollTo({ top: 0, behavior: "smooth" }) : ''
+  }
   return (
     <div
       className="flex items-center gap-3 cursor-pointer"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={() => action()}
     >
       <div>
         <div className={`font-black text-2xl text-slate-900 tracking-tight`}>

@@ -1,8 +1,9 @@
 import LocationPicker from "../../../../components/Map/MapController";
 import useMapStore from "../../../../store/mapStore";
+import { forwardRef } from "react";
 
 
-const DiscoverReports = ({className, reportTypes, onReportClick = null, fetchParams = {}}) => {
+const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = null, fetchParams = {}}, ref) => {
   const {
     selectedPosition,
     isLoadingReports,
@@ -30,7 +31,7 @@ const DiscoverReports = ({className, reportTypes, onReportClick = null, fetchPar
   };
 
   return ( 
-    <div className={`w-full max-w-6xl mx-auto p-4 ${className}`}>
+    <div ref={ref} className={`w-full max-w-6xl mx-auto py-25 ${className}`}>
       <div className="flex flex-col lg:flex-row items-stretch gap-8">
         {/* ---- القسم الوصفي (يسار) ---- */}
         <div className="w-full lg:w-1/3 space-y-6">
@@ -122,6 +123,6 @@ const DiscoverReports = ({className, reportTypes, onReportClick = null, fetchPar
       </p>
     </div>
    );
-}
+})
  
 export default DiscoverReports;

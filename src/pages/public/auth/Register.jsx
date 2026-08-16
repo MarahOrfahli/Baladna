@@ -180,7 +180,7 @@ export default function SignUpForm() {
                 <div>
                   <Button
                     content={"Sign Up"}
-                    className={`flex items-center justify-center w-full px-4 py-3 text-sm font-medium dark:bg-mist-500 text-basic-green bg-basic-green hover:bg-brand-600 dark:text-white transition rounded-lg shadow-theme-xs`}
+                    className={`flex items-center justify-center w-full px-4 py-3 text-sm font-medium dark:bg-mist-500 bg-basic-green hover:bg-brand-600 text-white transition rounded-lg shadow-theme-xs`}
                   />
                 </div>
               </div>

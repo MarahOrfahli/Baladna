@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 
-function localStorageValue(localvalue) {
-  return typeof localvalue === "string" ? localvalue : JSON.parse(localvalue);
+function checkValue(localvalue) {
+  return isString(localvalue) ? localvalue : JSON.parse(localvalue);
+}
+
+function isString(localvalue) {
+  return typeof localvalue === "string" ? true : false;
 }
 
 export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const localValue = localStorage.getItem(key);
-
-    return localValue ? localStorageValue(localValue) : initialValue;
+    console.log(localValue);
+    return localValue ? checkValue(localValue) : initialValue;
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    const temp = isString(value) ? value : JSON.stringify(value);
+    localStorage.setItem(key, temp);
   }, [key, value]);
 
   return [value, setValue];

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -18,7 +18,7 @@ import DiscoverReports from "./discoverReport/DiscoverReports";
 import CommunityDiscussions from "./community/Community";
 import FAQ from "./faq/FAQ";
 import Footer from "../../../components/footer/Footer";
-import ToggleBtn from '../../../components/common/ToggleBtn';
+import ToggleBtn from "../../../components/common/ToggleBtn";
 
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -106,7 +106,11 @@ const LandingPage = () => {
   return (
     <>
       <AppHeader>
-        <Logo />
+        <div
+          className={`dark:bg-basic-green-gray/90 p-2 rounded-sm dark:shadow-sm dark:shadow-gray-400`}
+        >
+          <Logo />
+        </div>
         <Nav
           links={Links}
           activeSection={activeSection}
@@ -115,16 +119,18 @@ const LandingPage = () => {
         <div>
           <div className="hidden [@media(min-width:1176px)]:flex items-center gap-3">
             <Button
-            fn={()=>{ navigate('./login') }}
+              fn={() => {
+                navigate("./login");
+              }}
               content={t("landing_page.header_btns.login")}
-              className={`w-full hover:bg-slate-100 text-slate-700 px-5 py-2.5 rounded-4xl font-bold`}
+              className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
             />
             <Button
               content={t("landing_page.header_btns.report")}
-              className={`w-full bg-basic-green hover:bg-emerald-700 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
+              className={`w-full bg-basic-green dark:bg-emerald-700 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
             />
-            <ToggleBtn isLang/>
-            <ToggleBtn isTheme/>
+            <ToggleBtn isLang />
+            <ToggleBtn isTheme />
           </div>
           <div className="hidden md:flex [@media(min-width:1176px)]:hidden items-center">
             <Button
@@ -197,6 +203,7 @@ const LandingPage = () => {
         )}
       </AppHeader>
       <Hero
+        handleNavClick={handleNavClick}
         ref={(element) => {
           if (element) {
             sectionRefs.current[Links[0].id] = element;
@@ -224,9 +231,20 @@ const LandingPage = () => {
         reportTypes={reportTypes}
         onReportClick={(report) => console.log("تم النقر على بلاغ:", report)}
         fetchParams={{ status: "active" }}
+        ref={(element) => {
+          if (element) {
+            sectionRefs.current[Links[3].id] = element;
+          }
+        }}
       />
 
-      <FAQ />
+      <FAQ
+        ref={(element) => {
+          if (element) {
+            sectionRefs.current[Links[4].id] = element;
+          }
+        }}
+      />
       <Footer />
     </>
   );

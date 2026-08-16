@@ -4,19 +4,25 @@ import { createBrowserRouter } from 'react-router-dom';
 // Importing Pages & Layouts...
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import RootBoundary from '../components/RootBoundary';
+import RoleProtectedRoute from './app.config';
 import App from '../App';
-// import RoleProtectedRoute from './RoleProtectedRoute';
-
+import Dashboard from '../pages/dashboard/Dashboard';
 
 // Lazy Loading..
 const Publiclayout = lazy(() => import('../layouts/PublicLayout') );
 const Landingpage = lazy(() => import('../pages/public/landingPage/LandingPage'));
 const Authlayout = lazy(() => import('../layouts/AuthLayout'));
+const Adminlayout = lazy(() => import('../layouts/AdminLayout'));
 const Loginpage = lazy(() => import('../pages/public/auth/Login'));
 const Registerpage = lazy(() => import('../pages/public/auth/register'));
 
-const spinnerElement = <LoadingSpinner center size="60px" color="#ef4444" />
+export const ROLES = {
+  ADMIN: 'Admin',
+  EMPLOYEE: 'Employee',
+  CITIZEN: 'Citizen'
+};
 
+const spinnerElement = <LoadingSpinner center size="60px" color="#ef4444" />
 const withSuspense = (Component) => (
   <Suspense fallback={spinnerElement}>
     <Component />
@@ -45,24 +51,18 @@ export const router = createBrowserRouter([
           { path: '/unauthorized', element: <div style={{ textAlign: 'center', marginTop: '5rem' }}><h2>403 - ليس لديك صلاحية لدخول هذه الصفحة!</h2></div> },
         ],
       },
-
-    //   // 2. مسارات مستقلة تماماً
-    //   { path: 'login', element: withSuspense(LoginPage) },
-    //   { path: 'unauthorized', element: <div style={{ textAlign: 'center', marginTop: '5rem' }}><h2>403 - ليس لديك صلاحية لدخول هذه الصفحة!</h2></div> },
-
-      // 3. مسارات المستخدم العادي المحمية (User Protected Routes)
-    //   {
-    //     element: <RoleProtectedRoute allowedRoles={['user']} />,
-    //     children: [
-    //       {
-    //         element: withSuspense(UserLayout),
-    //         children: [
-    //           { path: 'user/dashboard', element: withSuspense(UserDashboard) },
-    //           { path: 'user/profile', element: <div>تعديل الملف الشخصي</div> },
-    //         ],
-    //       },
-    //     ],
-    //   },
+      {
+        element: <RoleProtectedRoute allowedRoles={[ROLES.ADMIN]} />,
+        children: [
+          {
+            element: withSuspense(Adminlayout),
+            children: [
+              { path: '/dashboard', element: <Dashboard/> },
+              { path: '/profile', element: <div>تعديل الملف الشخصي</div> },
+            ],
+          },
+        ],
+      },
 
     //   // 4. مسارات الأدمن المحمية (Admin Protected Routes)
     //   {

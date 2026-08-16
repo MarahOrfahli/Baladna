@@ -11,7 +11,7 @@ const StatusSection = () => {
     fetchStatus();
   }, []);
   return (
-    <section id="statics_section" className="bg-[#033d34]">
+    <section id="statics_section" className="bg-[#033d34] dark:border-gray-800 dark:bg-gray-900">
       <div className="relative">
         <div className="container mx-auto max-sp:px-4">
           <div className="grid grid-cols-2 max-sp:grid-cols-1 lg:grid-cols-4 sm:gap-4 gap-7 items-center justify-center py-12">

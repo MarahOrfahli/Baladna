@@ -47,7 +47,7 @@ export const HowItWorks = forwardRef((props, ref) => {
   ];
 
   return (
-    <section ref={ref} className="py-24 bg-white relative">
+    <section ref={ref} className="py-24 bg-white relative dark:bg-gray-400/50">
       <div className="container mx-auto max-sp:px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-emerald-600 font-bold tracking-wider uppercase mb-3">
@@ -60,8 +60,6 @@ export const HowItWorks = forwardRef((props, ref) => {
             {t("landing_page.HowItWorks.section.discription")}
           </p>
         </div>
-
- {/* max-sp:h-300 max-sp:w-60 max-sp:m-auto h-100 */}
         <div className="grid grid-cols-2 max-sp:grid-cols-1 lg:grid-cols-4 group max-sp:h-300 sp:w-full sp:h-130 sp:gap-2 sm:gap-5 lg:h-65 gap-10 perspective-[1000px]">  
           <div className="hidden lg:block absolute top-30 left-[10%] right-[10%] h-0.5 bg-linear-to-r from-slate-100 via-green-200 to-slate-100 z-0"></div>
           {steps.map((step) => {
