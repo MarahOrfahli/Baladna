@@ -11,7 +11,6 @@ function isString(localvalue) {
 export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     const localValue = localStorage.getItem(key);
-    console.log(localValue);
     return localValue ? checkValue(localValue) : initialValue;
   });
 

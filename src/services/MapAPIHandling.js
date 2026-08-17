@@ -1,31 +1,31 @@
-import {nominatimAPI} from "./api/axiosClients";
+import { nominatimAPI } from "./api/axiosClients";
 
 export const fetchAddressDetails = async (lat, lng) => {
   try {
-    const response = await nominatimAPI.get('/reverse', {
+    const response = await nominatimAPI.get("/reverse", {
       params: {
-        format: 'json',
+        format: "json",
         lat,
         lon: lng,
         zoom: 18,
-        'accept-language': 'ar',
-      },
+        "accept-language": "ar"
+      }
     });
     const data = response.data;
     if (!data || !data.display_name) {
-      throw new Error('لا توجد بيانات مفصلة لهذا الموقع');
+      throw new Error("لا توجد بيانات مفصلة لهذا الموقع");
     }
     const address = data.address || {};
-    const road = address.road || address.pedestrian || '';
-    const neighbourhood = address.neighbourhood || address.suburb || '';
-    const city = address.city || address.town || address.village || '';
-    const country = address.country || '';
+    const road = address.road || address.pedestrian || "";
+    const neighbourhood = address.neighbourhood || address.suburb || "";
+    const city = address.city || address.town || address.village || "";
+    const country = address.country || "";
     const parts = [];
     if (road) parts.push(`📍 ${road}`);
     if (neighbourhood) parts.push(`🏘️ ${neighbourhood}`);
     if (city) parts.push(`🏙️ ${city}`);
     if (country) parts.push(`🌍 ${country}`);
-    return parts.length > 0 ? parts.join(' - ') : data.display_name;
+    return parts.length > 0 ? parts.join(" - ") : data.display_name;
   } catch (error) {
     console.log(error);
   }
@@ -33,13 +33,13 @@ export const fetchAddressDetails = async (lat, lng) => {
 
 export const searchLocation = async (query) => {
   try {
-    const response = await nominatimAPI.get('/search', {
+    const response = await nominatimAPI.get("/search", {
       params: {
-        format: 'json',
+        format: "json",
         q: query,
-        'accept-language': 'ar',
-        limit: 1,
-      },
+        "accept-language": "ar",
+        limit: 1
+      }
     });
     const data = response.data;
     if (data && data.length > 0) {
@@ -47,6 +47,7 @@ export const searchLocation = async (query) => {
     }
     return null;
   } catch (error) {
-    console.log(error);
+    console.error("Error in searchLocation:", error);
+    throw error;
   }
 };

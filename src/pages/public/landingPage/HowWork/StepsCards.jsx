@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Image from "../../../../components/ui/Image";
+import {Image} from "../../../../components/common/";
 const StepsCard = ({ step }) => {
   const { t } = useTranslation();
 

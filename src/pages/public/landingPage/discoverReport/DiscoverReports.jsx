@@ -1,9 +1,7 @@
-import LocationPicker from "../../../../components/Map/MapController";
-import useMapStore from "../../../../store/mapStore";
 import { forwardRef } from "react";
+import { useMapStore, LocationPicker } from "../../../../features/map";
 
-
-const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = null, fetchParams = {}}, ref) => {
+const DiscoverReports = forwardRef(({ className, fetchParams = {} }, ref) => {
   const {
     selectedPosition,
     isLoadingReports,
@@ -14,11 +12,21 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
     searchError,
     gpsError,
     lastUpdated,
-    // fetchReports,
-    zoomIn,
-    // cleanup
-  } = useMapStore()
-   // تنسيق وقت آخر تحديث
+    zoomIn
+  } = useMapStore();
+
+  const reportTypes = {
+    lighting: { color: "#fbbf24", icon: "lightbulb" },
+    waste: { color: "#6b7280", icon: "trash" },
+    water: { color: "#3b82f6", icon: "droplet" },
+    roads: { color: "#f97316", icon: "road" },
+    default: { color: "#9ca3af", icon: "location-dot" }
+  };
+
+  const onReportClick = () => {
+    console.log("clicked!");
+  };
+  // تنسيق وقت آخر تحديث
   const formatLastUpdated = (isoString) => {
     if (!isoString) return "لم يتم التحديث بعد";
     const date = new Date(isoString);
@@ -30,10 +38,9 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
     });
   };
 
-  return ( 
+  return (
     <div ref={ref} className={`w-full max-w-6xl mx-auto py-25 ${className}`}>
       <div className="flex flex-col lg:flex-row items-stretch gap-8">
-        {/* ---- القسم الوصفي (يسار) ---- */}
         <div className="w-full lg:w-1/3 space-y-6">
           <h2 className="text-3xl font-bold text-secondary">
             شاهد مدينتك وهي تتحسن
@@ -43,7 +50,7 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
             المشاكل المحيطة بك، دعمها بصوتك، أو متابعة حالتها.
           </p>
 
-          {/* أساطير الأنواع */}
+          {/* Report Types */}
           <div className="space-y-4 pt-4 border-t border-slate-100">
             {Object.entries(reportTypes).map(([key, def]) => {
               if (key === "default") return null;
@@ -74,7 +81,7 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
             <i className="fa-solid fa-expand"></i> تكبير الخريطة
           </button>
 
-          {/* عرض الإحداثيات والتفاصيل */}
+          {/* Location & Details */}
           <div className="mt-4 text-sm bg-gray-50 p-3 rounded-lg border border-gray-200">
             <div className="font-medium">الإحداثيات:</div>
             <div dir="ltr" className="font-mono">
@@ -101,7 +108,7 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
             )}
           </div>
 
-          {/* عرض وقت آخر تحديث */}
+          {/* Last Reports Updates On Map */}
           <div className="text-xs text-slate-400 text-center border-t pt-2 mt-2">
             <i className="fa-solid fa-clock ml-1"></i>
             آخر تحديث:{" "}
@@ -111,9 +118,12 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
           </div>
         </div>
 
-        {/* ---- القسم الأيمن: الخريطة والأدوات ---- */}
+        {/* Map & Tools */}
         <div className="w-full lg:w-2/3">
-          <LocationPicker onReportClick={onReportClick} fetchParams={fetchParams}/>
+          <LocationPicker
+            onReportClick={onReportClick}
+            fetchParams={fetchParams}
+          />
         </div>
       </div>
 
@@ -122,7 +132,7 @@ const DiscoverReports = forwardRef(({className, reportTypes, onReportClick = nul
         بياناته. انقر على علامة بلاغ لمعرفة التفاصيل.
       </p>
     </div>
-   );
-})
- 
+  );
+});
+
 export default DiscoverReports;

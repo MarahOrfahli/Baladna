@@ -17,7 +17,6 @@ export function ThemeProvider({ children }) {
   }
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    console.log(document.documentElement)
   }, []);
 
   const value = { theme, toggleTheme };

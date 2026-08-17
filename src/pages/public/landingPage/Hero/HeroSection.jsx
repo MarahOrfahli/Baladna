@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileText } from "@fortawesome/free-solid-svg-icons";
-import Button from "../../../../components/ui/Button";
+import { Button } from "../../../../components/ui";
 import { useTranslation } from "react-i18next";
 import ImgCard from "./ImgCard";
 import { forwardRef } from "react";
-
 
 const Hero = forwardRef(({handleNavClick}, ref) => {
   const { t } = useTranslation();
