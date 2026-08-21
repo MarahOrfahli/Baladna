@@ -120,6 +120,16 @@ const CommunitySection = forwardRef((props, ref) => {
                                     وتأكيد البلاغ لرفع أولويته!
                                 </p>
                             </div>
+                            <div className="mt-4 rounded-2xl bg-slate-700/50 p-4">
+                                <div className="mb-2 flex items-center gap-3">
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-600 text-sm font-bold">
+                                       م                                    </div>
+                                    <h6 className="text-sm font-bold">محمد سعيد</h6>
+                                </div>
+                                <p className="text-sm text-slate-300">
+                                   أعتقد أن المشكلة في انسداد المصارف عدم الوعي العام والقاء القمامة فيها مما يؤدي للانسداد الناتج
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

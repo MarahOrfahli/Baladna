@@ -7,14 +7,14 @@ import CommunityDiscussions from "./community/Community";
 import FAQ from "./faq/FAQ";
 
 const LandingPage = () => {
-  const { Links, handleNavClick, setRefLink } = useOutletContext();
+  const { sectionsLinks, handleNavClick, setRefLink } = useOutletContext();
 
   return (
     <>
       <Hero
         handleNavClick={handleNavClick}
         ref={(element) => {
-          setRefLink(element, Links[0].id);
+          setRefLink(element, sectionsLinks[0].id);
         }}
       />
 
@@ -22,26 +22,26 @@ const LandingPage = () => {
 
       <HowItWorks
         ref={(element) => {
-          setRefLink(element, Links[1].id);
+          setRefLink(element, sectionsLinks[1].id);
         }}
       />
 
       <CommunityDiscussions
         ref={(element) => {
-          setRefLink(element, Links[2].id);
+          setRefLink(element, sectionsLinks[2].id);
         }}
       />
 
       <DiscoverReports
         fetchParams={{ status: "active" }}
         ref={(element) => {
-          setRefLink(element, Links[3].id);
+          setRefLink(element, sectionsLinks[3].id);
         }}
       />
 
       <FAQ
         ref={(element) => {
-          setRefLink(element, Links[4].id);
+          setRefLink(element, sectionsLinks[4].id);
         }}
       />
     </>

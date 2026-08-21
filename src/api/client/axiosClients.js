@@ -31,7 +31,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      error.message = "User Not Found";
       return Promise.reject(error);
     }
     if (error.response?.status === 403) {

@@ -1,10 +1,9 @@
 import { create } from "zustand";
 import {
-  API_ENDPOINTS_PUPLIC,
-  getData,
   fetchAddressDetails,
   searchLocation
-} from "../../../services";
+} from "../../../api";
+import { getLatestAnonymousReports } from "../../../services";
 
 export const useMapStore = create((set, get) => ({
   selectedPosition: [33.5138, 36.2765],
@@ -47,13 +46,10 @@ export const useMapStore = create((set, get) => ({
   },
 
   // جلب البلاغات مع إمكانية تمرير بارامترات
-  fetchReports: async (params = {}) => {
+  fetchReports: async () => {
     set({ isLoadingReports: true, reportsError: null });
     try {
-      const response = await getData(
-        API_ENDPOINTS_PUPLIC.Website.REPORT,
-        params
-      );
+      const response = await getLatestAnonymousReports()
       set({
         reports: response.data,
         isLoadingReports: false,

@@ -31,7 +31,6 @@ const DiscoverReports = forwardRef(({ className, fetchParams = {} }, ref) => {
     if (!isoString) return "لم يتم التحديث بعد";
     const date = new Date(isoString);
     return date.toLocaleTimeString("en", {
-      //"ar-SA"
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit"
@@ -39,7 +38,7 @@ const DiscoverReports = forwardRef(({ className, fetchParams = {} }, ref) => {
   };
 
   return (
-    <div ref={ref} className={`w-full max-w-6xl mx-auto py-25 ${className}`}>
+    <div ref={ref} className={`w-full max-w-6xl mx-auto py-25 px-4 ${className}`}>
       <div className="flex flex-col lg:flex-row items-stretch gap-8">
         <div className="w-full lg:w-1/3 space-y-6">
           <h2 className="text-3xl font-bold text-secondary">

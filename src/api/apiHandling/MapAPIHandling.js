@@ -1,4 +1,4 @@
-import { nominatimAPI } from "./api/axiosClients";
+import { nominatimAPI } from "../client/axiosClients";
 
 export const fetchAddressDetails = async (lat, lng) => {
   try {

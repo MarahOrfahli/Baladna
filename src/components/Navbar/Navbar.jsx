@@ -1,6 +1,6 @@
 import { Button } from "../ui";
 
-const Nav = ({ activeSection, handleNavClick, links }) => {
+const Nav = ({ activeSection, handleNavClick, sectionsLinks }) => {
   const getButtonClasses = (sectionId) => {
     return activeSection === sectionId
       ? `text-basic-green border-b-2 border-basic-green dark:text-basic-green-gray dark:border-basic-green-gray font-bold`
@@ -9,7 +9,7 @@ const Nav = ({ activeSection, handleNavClick, links }) => {
 
   return (
     <nav className="hidden md:flex md:text-[0.9rem] lg:text-[1rem] items-center gap-8 dark:text-white ">
-      {links.map((link) => (
+      {sectionsLinks.map((link) => (
         <Button
           key={link.id}
           fn={() => handleNavClick(link.id)}

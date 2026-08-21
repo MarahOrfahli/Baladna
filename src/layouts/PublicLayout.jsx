@@ -8,7 +8,7 @@ const PublicLayout = () => {
   const { t } = useTranslation();
   const sectionRefs = useRef({});
   const [activeSection, setActiveSection] = useState("hero_section");
-  const Links = [
+  const sectionsLinks = [
     {
       id: "hero_section",
       className: "landing-page-links-active",
@@ -54,10 +54,10 @@ const PublicLayout = () => {
     <>
       <PublicHeader
         activeSection={activeSection}
-        Links={Links}
+        sectionsLinks={sectionsLinks}
         handleNavClick={handleNavClick}
       />
-      <Outlet context={{Links, handleNavClick, setRefLink}} />
+      <Outlet context={{sectionsLinks, handleNavClick, setRefLink}} />
       <Footer />
     </>
   );

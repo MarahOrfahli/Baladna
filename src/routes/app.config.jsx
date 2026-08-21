@@ -1,7 +1,7 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "../features/auth";
 
-const RoleProtectedRoute = ({ allowedRoles }) => {
+export const RoleProtectedRoute = ({ allowedRoles }) => {
   const { isAuthenticated, role } = useAuthStore();
 
   if (!isAuthenticated) {
@@ -14,4 +14,16 @@ const RoleProtectedRoute = ({ allowedRoles }) => {
   return <Outlet />;
 };
 
-export default RoleProtectedRoute;
+export const AuthGuard = () => {
+  const { isAuthenticated, role } = useAuthStore();
+
+  if (isAuthenticated) {
+    if (role) {
+      if (role == "admin" || role == "employee")
+        return <Navigate to="/dashboard" replace />;
+      else return <Navigate to="/" replace />;
+    } else return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};

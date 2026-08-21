@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import { getData } from "../services/APIHandling";
-import { API_ENDPOINTS_PUPLIC } from "../services/api/EndpointsPuplic";
+import { getWebsiteStats } from "../services/";
 
 const useStatusStore = create((set) => ({
 
@@ -13,7 +12,7 @@ const useStatusStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const temp_status = [];
-      const response = await getData(API_ENDPOINTS_PUPLIC.Website.STATUS);
+      const response = await getWebsiteStats()
       temp_status.push({
         number: response.data.resolved_reports,
         type: "resolved_reports",

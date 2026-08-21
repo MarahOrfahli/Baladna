@@ -30,6 +30,7 @@ export const Input = ({
   success = false,
   error = false,
   hint,
+  validation
 }) => {
   // Base classes with Tailwind CSS v4 compatible utilities
   let inputClasses =
@@ -64,6 +65,7 @@ export const Input = ({
         step={step}
         disabled={disabled}
         className={inputClasses}
+        {...validation}
       />
       {hint && (
         <p

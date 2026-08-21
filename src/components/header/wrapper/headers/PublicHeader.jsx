@@ -11,10 +11,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../../../ui";
+import { useAuthStore } from "../../../../features/auth";
 
-export const PublicHeader = ({activeSection, Links , handleNavClick}) => {
+export const PublicHeader = ({ activeSection, sectionsLinks, handleNavClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [tabletMenuOpen, setTabletMenuOpen] = useState(false);
+  const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
@@ -25,23 +27,36 @@ export const PublicHeader = ({activeSection, Links , handleNavClick}) => {
         <Logo />
       </div>
       <Nav
-        links={Links}
+        sectionsLinks={sectionsLinks}
         activeSection={activeSection}
         handleNavClick={handleNavClick}
       />
       <div>
         <div className="hidden [@media(min-width:1176px)]:flex items-center gap-3">
-          <Button
-            fn={() => {
-              navigate("./login");
-            }}
-            content={t("landing_page.header_btns.login")}
-            className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
-          />
-          <Button
-            content={t("landing_page.header_btns.report")}
-            className={`w-full bg-basic-green dark:bg-emerald-700 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
-          />
+          {!isAuthenticated ? (
+            <>
+              <Button
+                fn={() => {
+                  navigate("./login");
+                }}
+                content={t("landing_page.header_btns.login")}
+                className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
+              />
+              <Button
+                content={t("landing_page.header_btns.report")}
+                className={`w-full bg-basic-green dark:bg-emerald-700 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
+              />
+            </>
+          ): (
+            <Button
+                fn={() => {
+                  navigate("./dashboard");
+                }}
+                content={'My Dashboard'}
+                className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
+              />
+          )}
+
           <ToggleBtn isLang />
           <ToggleBtn isTheme />
         </div>
@@ -117,4 +132,3 @@ export const PublicHeader = ({activeSection, Links , handleNavClick}) => {
     </AppHeader>
   );
 };
-
