@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
-import { UserForm } from "../../../features/users";
+import { UserForm, useUserStore } from "../../../features/users";
 import { DataTable } from "../../../features/datatable";
 import { useModalStore } from "../../../store/modalStore";
-import { useUserStore } from "../../../features/users/store/userStore";
 import {
   AddEditModal,
   DeleteConfirmModal,
@@ -120,7 +119,15 @@ export const Users = () => {
         { value: "employee", label: "Employee" },
         { value: "citizen", label: "Citizen" }
       ]
-    }
+    },
+    // {
+    //   key: "is_active",
+    //   label: "All Status",
+    //   options: [
+    //     { value: "1", label: "Active" },
+    //     { value: "0", label: "Unactive" },
+    //   ]
+    // }
   ];
 
   return (
@@ -142,7 +149,7 @@ export const Users = () => {
           addLabel={"Add Employee"}
           onEdit={(row) => openAddEdit(row)}
           onDelete={(row) => openDelete([row.id], false)}
-          onBulkDelete={(ids) => openDelete(ids, true)}
+          // onBulkDelete={(ids) => openDelete(ids, true)}
         />
       </div>
 

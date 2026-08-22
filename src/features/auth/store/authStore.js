@@ -1,8 +1,6 @@
 import { create } from "zustand";
-import { login, logout } from "../../../services";
+import { login, logout, register } from "../../../services";
 // import { postData, ENDPOINTS } from "../../../services";
-
-
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -39,7 +37,39 @@ export const useAuthStore = create((set) => ({
       return true;
     } catch (err) {
       set({
-        error: err.response?.data?.message || "حدث خطأ أثناء تسجيل الدخول",
+        error: err.response?.data?.message || "Error While Login...",
+        loading: false
+      });
+      return false;
+    }
+  },
+
+  registering: async (credentials) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await register(credentials);
+      const { success } = response;
+      const { token, user } = response.data;
+      if (success) {
+        const role = user.role;
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+        localStorage.setItem("email", credentials.email);
+        localStorage.setItem("password", credentials.password);
+
+        set({
+          token,
+          user,
+          role,
+          isAuthenticated: true,
+          loading: false
+        });
+      }
+
+      return true;
+    } catch (err) {
+      set({
+        error: err.response?.data?.message || "Error While Registring..",
         loading: false
       });
       return false;
@@ -52,7 +82,7 @@ export const useAuthStore = create((set) => ({
     } catch (err) {
       console.error("Logout error on server:", err);
     } finally {
-      console.log("Out")
+      console.log("Out");
       localStorage.removeItem("token");
       localStorage.removeItem("role");
       localStorage.removeItem("email");

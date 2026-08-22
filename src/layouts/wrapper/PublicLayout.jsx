@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { PublicHeader } from "../components/header/wrapper/headers/PublicHeader";
-import Footer from "../components/footer/Footer";
+import { PublicHeader } from "../../components/header/wrapper/headers/PublicHeader";
+import Footer from "../../components/footer/Footer";
 import { useState, useRef } from "react";
+import { useAuthStore } from "../../features/auth";
 
 const PublicLayout = () => {
   const { t } = useTranslation();
   const sectionRefs = useRef({});
   const [activeSection, setActiveSection] = useState("hero_section");
+  const {isAuthenticated} = useAuthStore()
   const sectionsLinks = [
     {
       id: "hero_section",
@@ -58,7 +60,7 @@ const PublicLayout = () => {
         handleNavClick={handleNavClick}
       />
       <Outlet context={{sectionsLinks, handleNavClick, setRefLink}} />
-      <Footer />
+      { !isAuthenticated && <Footer />}
     </>
   );
 };

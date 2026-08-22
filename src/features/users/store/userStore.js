@@ -26,8 +26,6 @@ export const useUserStore = create((set) => ({
         payload?.total ??
         payload?.meta?.total ??
         users.length;
-        
-      console.log(users)
       set({ users, length: total });
     } catch (err) {
       set({ error: err.message, loading: false });

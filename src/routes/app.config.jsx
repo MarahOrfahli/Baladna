@@ -18,12 +18,25 @@ export const AuthGuard = () => {
   const { isAuthenticated, role } = useAuthStore();
 
   if (isAuthenticated) {
-    if (role) {
-      if (role == "admin" || role == "employee")
-        return <Navigate to="/dashboard" replace />;
-      else return <Navigate to="/" replace />;
-    } else return <Navigate to="/" replace />;
+    if (role == "admin" || role == "employee") return <Navigate to="/dashboard" replace />;
+      else if (role == "citizen") return <Navigate to="/my-account" replace />;
   }
 
+  return <Outlet />;
+};
+
+export const AuthAdminGuard = () => {
+  const { isAuthenticated, role } = useAuthStore();
+
+  if (isAuthenticated) {
+    if (role == "citizen") return <Navigate to="/my-account" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export const AuthRoleGuard = () => {
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) <Navigate to="/" replace />;
   return <Outlet />;
 };

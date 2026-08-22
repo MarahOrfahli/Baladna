@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { ToggleBtn } from "../components/common";
-import SplashScreen from "../pages/public/auth/SplashScreen";
-import AuthCard from "../pages/public/auth/AuthCard";
+import { ToggleBtn } from "../../components/common";
+import SplashScreen from "../../pages/public/auth/SplashScreen";
+import AuthCard from "../../pages/public/auth/AuthCard";
 
 const AuthLayout = () => {
   return (

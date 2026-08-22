@@ -1,18 +1,14 @@
 // components/Sidebar/Sidebar.jsx
 import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { useSidebar } from "../../hooks/context/SidebarContext";
 import { SidebarLogo } from "./SidebarLogo";
 import { SidebarGroup } from "./SidebarGroup";
-import { Button } from "../ui";
-import { useAuthStore } from "../../features/auth";
 
 export const Sidebar = ({ LogoIn = false, sections = [], children }) => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const [openSubmenu, setOpenSubmenu] = useState(null);
-  const { role } = useAuthStore();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const isVisible = isExpanded || isHovered || isMobileOpen;
 
@@ -54,15 +50,6 @@ export const Sidebar = ({ LogoIn = false, sections = [], children }) => {
         className={`py-2.5 mb-3 flex justify-between items-center border-b ${!isVisible && "mt-10"}`}
       >
         {LogoIn && <SidebarLogo isVisible={isVisible} />}
-        {role == "employee" && (
-          <Button
-            fn={() => {
-              navigate("/");
-            }}
-            content={"Homepage"}
-            className={`${isVisible ? "flex" : "hidden"} items-center justify-center p-1 px-2 text-gray-500 border-gray-200 rounded-lg z-99999 dark:border-gray-800 dark:text-gray-400 border`}
-          />
-        )}
       </div>
 
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">

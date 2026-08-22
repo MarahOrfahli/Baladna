@@ -19,6 +19,7 @@ export const Checkbox = ({
   onChange,
   className = "",
   disabled = false,
+  error = false,  
   validation
 }) => {
   return (
@@ -31,7 +32,7 @@ export const Checkbox = ({
         <input
           id={id}
           type="checkbox"
-          className={`w-5 h-5 appearance-none cursor-pointer dark:border-gray-700 border border-gray-300 checked:border-transparent rounded-md checked:bg-emerald-500 disabled:opacity-60 ${className}`}
+          className={`w-5 h-5 appearance-none cursor-pointer ${ error ? 'border-red-500 ':'' } dark:border-gray-700 border border-gray-300 checked:border-transparent rounded-md checked:bg-emerald-500 disabled:opacity-60 ${className}`}
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
           disabled={disabled}

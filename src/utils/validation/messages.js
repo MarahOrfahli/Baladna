@@ -1,4 +1,8 @@
 export const MESSAGES = {
+  name: {
+     required: "Name is required",
+    minLength: (min) => `Name must have at least ${min} characters`,
+  },
   email: {
     required: "Email is required",
     invalid: "Email is not valid"
@@ -11,8 +15,8 @@ export const MESSAGES = {
     number: "Password must contain at least one number"
   },
   phone: {
-    invalid: "Phone format should be like +963985678881",
-    unsupported: "Unsupported phone prefix"
+    invalid: "Invalid phone number. Must be 9 digits starting with 9 (e.g., 994123456)",
+    unsupported: "Unsupported prefix. Allowed prefixes: 93, 94, 95, 96, 98, 99"
   },
   terms: {
     required: "You must agree to the terms and conditions"

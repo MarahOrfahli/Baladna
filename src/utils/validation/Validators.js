@@ -1,6 +1,16 @@
 import { z } from "zod";
 import { MESSAGES } from "./messages";
 
+// Username Validation..
+export const usernameSchema = (options = {})=>{
+  const { min = 8} = options;
+  let schema = z
+  .string()
+    .nonempty(MESSAGES.name.required)
+  .min(min, { message: MESSAGES.name.minLength(min) });
+  return schema;
+}
+
 // Email Validation..
 export const emailSchema = (required = true) =>
   z
@@ -30,6 +40,9 @@ export const passwordSchema = (options = {}) => {
   return schema;
 };
 
+// check if passwords match...
+export const passwordsMatch = (data) => data.password === data.confirmPassword;
+
 // Password confirm Validation..
 export const confirmPasswordSchema = z
   .string()
@@ -39,10 +52,10 @@ export const confirmPasswordSchema = z
 export const phoneSchema = z
   .string()
   .trim()
-  .regex(/^\+9639[0-9]{8}$/, MESSAGES.phone.invalid)
+  .regex(/^9[0-9]{8}$/, MESSAGES.phone.invalid)
   .refine(
     (val) => {
-      const prefix = val.slice(4, 6);
+      const prefix = val.slice(0, 2);
       return ["93", "94", "95", "96", "98", "99"].includes(prefix);
     },
     { message: MESSAGES.phone.unsupported }
@@ -53,8 +66,6 @@ export const termsSchema = z
   .boolean()
   .refine((val) => val === true, { message: MESSAGES.terms.required });
 
-// check if passwords match...
-export const passwordsMatch = (data) => data.password === data.confirmPassword;
 
 // export const postSchema = z.object({
 //   title: z

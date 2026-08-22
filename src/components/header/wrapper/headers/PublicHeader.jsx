@@ -12,25 +12,36 @@ import {
 import { useState } from "react";
 import { Button } from "../../../ui";
 import { useAuthStore } from "../../../../features/auth";
+import NotificationDropdown from "../NotificationDropdown";
+import UserDropdown from "../UserDropdown";
 
-export const PublicHeader = ({ activeSection, sectionsLinks, handleNavClick }) => {
+export const PublicHeader = ({
+  activeSection,
+  sectionsLinks,
+  handleNavClick
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [tabletMenuOpen, setTabletMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, role } = useAuthStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
     <AppHeader>
-      <div
-        className={`dark:bg-basic-green-gray/90 p-2 rounded-sm dark:shadow-sm dark:shadow-gray-400`}
-      >
+      <div className={`flex gap-4 justify-center items-center`}>
         <Logo />
+        {isAuthenticated && (
+          <span className="border-l border-b-brand-400 w-0.5 h-14"></span>
+        )}
+        {isAuthenticated && <UserDropdown />}
+        {isAuthenticated && <NotificationDropdown />}
       </div>
-      <Nav
-        sectionsLinks={sectionsLinks}
-        activeSection={activeSection}
-        handleNavClick={handleNavClick}
-      />
+      {!isAuthenticated && (
+        <Nav
+          sectionsLinks={sectionsLinks}
+          activeSection={activeSection}
+          handleNavClick={handleNavClick}
+        />
+      )}
       <div>
         <div className="hidden [@media(min-width:1176px)]:flex items-center gap-3">
           {!isAuthenticated ? (
@@ -42,19 +53,20 @@ export const PublicHeader = ({ activeSection, sectionsLinks, handleNavClick }) =
                 content={t("landing_page.header_btns.login")}
                 className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
               />
-              <Button
-                content={t("landing_page.header_btns.report")}
-                className={`w-full bg-basic-green dark:bg-emerald-700 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
-              />
             </>
-          ): (
+          ) : role == "employee" ? (
             <Button
-                fn={() => {
-                  navigate("./dashboard");
-                }}
-                content={'My Dashboard'}
-                className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
-              />
+              fn={() => {
+                navigate("./dashboard");
+              }}
+              content={"My Dashboard"}
+              className={`w-full hover:bg-slate-100 text-slate-700 dark:bg-basic-green-gray px-5 py-2.5 rounded-4xl font-bold`}
+            />
+          ) : (
+            <Button
+              content={t("landing_page.header_btns.report")}
+              className={`w-full bg-basic-green dark:bg-emerald-700 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-4xl font-bold text-sm shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] flex items-center gap-2 active:scale-95`}
+            />
           )}
 
           <ToggleBtn isLang />

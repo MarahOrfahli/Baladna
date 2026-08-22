@@ -3,11 +3,10 @@ import { create } from "zustand";
 const defaultValues = {
   id: null,
   name: "",
-  parent_id: null,
+  parent_id: null
 };
 
 export const useAreaFormStore = create((set) => ({
-
   defaultValues: defaultValues,
   isSubmitting: false,
   submitError: null,
@@ -22,6 +21,6 @@ export const useAreaFormStore = create((set) => ({
     set({
       defaultValues: defaultValues,
       isSubmitting: false,
-      submitError: null,
-    }),
+      submitError: null
+    })
 }));

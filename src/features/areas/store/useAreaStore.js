@@ -9,19 +9,35 @@ import {
 
 export const useAreaStore = create((set) => ({
   areas: [],
+  cities: [],
   allAreas: [],
   length: 0,
   loading: false,
+  loadingCities: false,
   error: null,
 
+  // Custom
   fetchAllAreas: async () => {
     const response = await adminGetAreas();
     const payload = Array.isArray(response) ? response : response.data;
     set({ allAreas: payload });
   },
 
+  fetchCities: async () => {
+    set({ loadingCities: true, error: null });
+    try {
+      const response = await adminGetAreas({ parent_id: '' });
+      set({ cities: response.data });
+    } catch (error) {
+      set({ error: error.message, loadingCities: false });
+    } finally {
+      set({ loadingCities: false });
+    }
+  },
+
   fetchAreas: async (params = {}) => {
-    set({ loading: true, error: null });
+    console.log(params)
+    set({ loading: true, error: null, areas: [] });
     try {
       const response = await adminGetAreas(params);
       const payload = Array.isArray(response) ? response : response.data;
@@ -50,12 +66,12 @@ export const useAreaStore = create((set) => ({
   addArea: async (data) => {
     set({ loading: true, error: null });
     try {
-      const res = await adminCreateArea(data)
+      const res = await adminCreateArea(data);
       set((state) => ({
-        areas: [...state.areas, res.data],
+        areas: [...state.areas, res.data.data],
         loading: false
       }));
-      return res.status;
+      return res.data.success;
     } catch (err) {
       set({ error: err.message, loading: false });
     }
@@ -64,12 +80,14 @@ export const useAreaStore = create((set) => ({
   updateArea: async (id, updatedData) => {
     set({ loading: true, error: null });
     try {
-      const res = await adminUpdateArea(id, updatedData)
+      const res = await adminUpdateArea(id, updatedData);
       set((state) => ({
-        areas: state.areas.map((area) => (area.id === id ? res.data : area)),
+        areas: state.areas.map((area) =>
+          area.id === id ? res.data.data : area
+        ),
         loading: false
       }));
-      return res;
+      return res.data.success;
     } catch (err) {
       set({ error: err.message, loading: false });
     }
@@ -78,12 +96,12 @@ export const useAreaStore = create((set) => ({
   deleteArea: async (id) => {
     set({ loading: true, error: null });
     try {
-      const res = await adminDeleteArea(id)
+      const res = await adminDeleteArea(id);
       set((state) => ({
         areas: state.areas.filter((area) => area.id !== id),
         loading: false
       }));
-      return res.status;
+      return res.data.status;
     } catch (err) {
       set({ error: err.message, loading: false });
     }

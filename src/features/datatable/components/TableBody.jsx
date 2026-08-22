@@ -15,6 +15,7 @@ export const TableBody = ({
   rowsPerPage
 }) => {
   const checkingType = (value) => {
+    console.log(value)
     if (typeof value === "string") return value;
     else if (typeof value === "boolean")
       return (

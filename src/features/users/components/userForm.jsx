@@ -1,16 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { userSchema } from "../schemas/userSchema";
 import { useFormStore } from "../store/userFormStore";
+import { useAreaStore } from "../../areas";
 
 export const UserForm = ({
   submitLabel,
   cancelLabel = "Cancel",
   onSubmit,
   initialData,
-  onClose,
+  onClose
 }) => {
   const {
     defaultValues,
@@ -18,21 +20,26 @@ export const UserForm = ({
     isSubmitting,
     setSubmitting,
     submitError,
-    setSubmitError,
+    setSubmitError
   } = useFormStore();
+
+  const { cities, areas, fetchCities, fetchAreas } = useAreaStore();
 
   const {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: initialData || defaultValues,
+    defaultValues: initialData || defaultValues
   });
 
   useEffect(() => {
-    console.log(initialData)
+    fetchCities();
+  }, []);
+
+  useEffect(() => {
     if (initialData) {
       setDefaultValues(initialData);
       reset(initialData);
@@ -53,6 +60,10 @@ export const UserForm = ({
       setSubmitting(false);
     }
   };
+
+  const citySelection = (e)=>{
+    fetchAreas({ parent_id: Number(e.target.value) })
+  }
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-4">
@@ -201,6 +212,26 @@ export const UserForm = ({
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">
+            City
+          </label>
+          <Controller
+            name="parent_id"
+            control={control}
+            render={({ field }) => (
+              <select
+                {...field}
+                onChange={citySelection}
+                className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+              >
+                {cities.map((city) => (
+                  <option key={city.id} value={city.id}>{city.name}</option>
+                ))}
+              </select>
+            )}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">
             Area
           </label>
           <Controller
@@ -208,36 +239,39 @@ export const UserForm = ({
             control={control}
             render={({ field }) => (
               <select
+              disabled={ areas.length == 0 }
                 {...field}
-                className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                onChange={(e) => field.onChange(e.target.value)}
+                className={`w-full px-3.5 py-2 ${
+                  areas.length == 0
+                    ? "bg-gray-500 text-mauve-300"
+                    : "bg-slate-50 dark:bg-slate-900 border text-slate-800 dark:text-slate-100"
+                } border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30`}
               >
-                <option value="area1">area1</option>
-                <option value="area2">area2</option>
+                {areas.map((area) => (
+                  <option key={area.id} value={area.id}>{area.name}</option>
+                ))}
               </select>
             )}
           />
         </div>
-
-        <div>
-          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">
-            Status
-          </label>
-          <Controller
-            name="is_active"
-            control={control}
-            render={({ field }) => (
-              <select
-                {...field}
-                value={field.value.toString()} // تحويل boolean إلى string لعنصر select
-                onChange={(e) => field.onChange(e.target.value === "true")}
-                className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
-              >
-                <option value="true">Active</option>
-                <option value="false">Unactive</option>
-              </select>
-            )}
-          />
-        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <Controller
+          name="is_active"
+          control={control}
+          render={({ field }) => (
+            <input
+              type="checkbox"
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
+              className="w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500"
+            />
+          )}
+        />
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          Active
+        </label>
       </div>
 
       {/* ----- عرض الخطأ العام (إن وجد) ----- */}

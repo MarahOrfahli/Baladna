@@ -103,7 +103,7 @@ export const AreaForm = ({
           render={({ field }) => (
             <select
               {...field}
-              value={field.value ?? ""} // التعامل مع null
+              value={field.value ?? ""}
               onChange={(e) =>
                 field.onChange(e.target.value.length > 0 ? Number(e.target.value) : null)
               }

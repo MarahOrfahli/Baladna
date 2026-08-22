@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 /**
  * @param {Object} props
  * @param {string} [props.type="text"] - Input type (text, number, email, password, date, time, etc.)
@@ -29,12 +33,15 @@ export const Input = ({
   disabled = false,
   success = false,
   error = false,
+  eye = false,
   hint,
   validation
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  
   // Base classes with Tailwind CSS v4 compatible utilities
   let inputClasses =
-    "h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 " +
+    "h-9 w-full rounded-lg border appearance-none px-4 py-2 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 " +
     className;
 
   if (disabled) {
@@ -54,7 +61,7 @@ export const Input = ({
   return (
     <div className="relative">
       <input
-        type={type}
+        type={eye ? showPassword ? "text" : "password" : type}
         id={id}
         name={name}
         placeholder={placeholder}
@@ -67,14 +74,34 @@ export const Input = ({
         className={inputClasses}
         {...validation}
       />
+
+      { eye && <span
+        onClick={() => setShowPassword(!showPassword)}
+        className={`absolute z-30 ${eye && error ? 'top-1.5' : '-translate-y-1/2 top-1/2'}  cursor-pointer right-4`}
+      >
+        {showPassword ? (
+          <FontAwesomeIcon
+            icon={faEye}
+            size="2"
+            className="fill-gray-500 dark:fill-gray-400"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faEyeSlash}
+            size="2"
+            className="fill-gray-500 dark:fill-gray-400"
+          />
+        )}
+      </span>}
+
       {hint && (
         <p
           className={`mt-1.5 text-xs ${
             error
               ? "text-error-500"
               : success
-              ? "text-success-500"
-              : "text-gray-500"
+                ? "text-success-500"
+                : "text-gray-500"
           }`}
         >
           {hint}
